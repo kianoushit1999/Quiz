@@ -16,6 +16,12 @@ export function useFetchData(initialUrl) {
                 questions: [],
                 status: 'error'
             }
+
+        case "active": 
+            return {
+                ...state,
+                status: "active"
+            }
         default:
             throw new Error('Unknown error occured.')
     }
@@ -38,5 +44,5 @@ export function useFetchData(initialUrl) {
     })
   }, [url]);
 
-  return [setUrl, response];
+  return [setUrl, response, dispatch];
 }
