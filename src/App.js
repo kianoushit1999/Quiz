@@ -37,7 +37,7 @@ function App() {
             </button>
           </StartScreen>
         )}
-        {response.status.toLowerCase() === 'active' && <Question />}
+        {response.status.toLowerCase() === 'active' && <Question qInfo={response.questions[response.index]}/>}
       </Main>
     </div>
   );

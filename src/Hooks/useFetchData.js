@@ -28,6 +28,7 @@ export function useFetchData(initialUrl) {
   }, {
     questions:[],
     status: 'Loading', //Loading , error, ready, active, finished
+    index: 0
   })
 
   useEffect(() => {
