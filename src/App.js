@@ -16,6 +16,12 @@ function App() {
   );
   const [points, setPoints] = useState(0);
 
+  const numQuestions = response.questions.length;
+  const sumOfPoints = response.questions.reduce(
+    (previousValue, currentValue) => previousValue + currentValue.points,
+    0
+  );
+
   const activeHandler = () => {
     dispatch({
       type: "active",
@@ -30,9 +36,7 @@ function App() {
         {response.status.toLowerCase() === "error" && <Error />}
         {response.status.toLowerCase() === "ready" && (
           <StartScreen>
-            <h3>
-              {response.questions.length} questions to test your knowledge
-            </h3>{" "}
+            <h3>{numQuestions} questions to test your knowledge</h3>{" "}
             <button className="btn btn-ui" onClick={activeHandler}>
               Let's start
             </button>
@@ -40,7 +44,12 @@ function App() {
         )}
         {response.status.toLowerCase() === "active" && (
           <>
-            <Progress />
+            <Progress
+              points={points}
+              numQuestions={numQuestions}
+              ind={response.index}
+              sumOfPoints={sumOfPoints}
+            />
             <Question
               dispatch={dispatch}
               qInfo={response.questions[response.index]}
