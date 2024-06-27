@@ -1,8 +1,9 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Options from './Options';
+import NextButton from './NextButton';
 
-function Question({qInfo}) {
+function Question({qInfo, dispatch, onSetPoint}) {
 
     const ans = qInfo.correctOption
     const [selectedAns, setSelectedAns] = useState(null);
@@ -11,12 +12,22 @@ function Question({qInfo}) {
         setSelectedAns(id)
     }
 
+    function resetSelectedAnsHandler(){
+        setSelectedAns((selectedAns) => null)
+    }
+
+    useEffect(() => {
+    if (selectedAns === ans) onSetPoint((points) => points + qInfo.points);
+  }, [ans, onSetPoint, selectedAns, qInfo]);
+
     return (
         <div>
             <h4>{qInfo.question}</h4>
             {qInfo.options.map((value, index, array) => {
                 return <Options key={index} ind={index} correctAnswerHandler={selectedAnsHandler} selectedAns={selectedAns} ans={ans}>{value}</Options>
             })}
+
+            {selectedAns!==null && <NextButton dispatch={dispatch} onReset={resetSelectedAnsHandler}></NextButton>}
         </div>
     )
 }

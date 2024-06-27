@@ -1,5 +1,6 @@
+import { useState } from "react";
+
 import Header from "./components/Header";
-import DateCounter from "./DateCounter";
 import Main from "./components/Main";
 import Loader from "./components/Loader";
 import Error from "./components/Error";
@@ -7,11 +8,13 @@ import Error from "./components/Error";
 import { useFetchData } from "./Hooks/useFetchData";
 import StartScreen from "./StartScreen";
 import Question from "./components/Question";
+import Progress from "./components/Progress";
 
 function App() {
   const [setUrl, response, dispatch] = useFetchData(
     "http://localhost:5454/questions"
   );
+  const [points, setPoints] = useState(0);
 
   const activeHandler = () => {
     dispatch({
@@ -23,8 +26,6 @@ function App() {
     <div className="app">
       <Header />
       <Main>
-        <p>1/15</p>
-        <p>Question ?</p>
         {response.status.toLowerCase() === "loading" && <Loader />}
         {response.status.toLowerCase() === "error" && <Error />}
         {response.status.toLowerCase() === "ready" && (
@@ -37,7 +38,16 @@ function App() {
             </button>
           </StartScreen>
         )}
-        {response.status.toLowerCase() === 'active' && <Question qInfo={response.questions[response.index]}/>}
+        {response.status.toLowerCase() === "active" && (
+          <>
+            <Progress />
+            <Question
+              dispatch={dispatch}
+              qInfo={response.questions[response.index]}
+              onSetPoint={setPoints}
+            />
+          </>
+        )}
       </Main>
     </div>
   );

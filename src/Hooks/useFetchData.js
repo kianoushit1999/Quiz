@@ -22,6 +22,12 @@ export function useFetchData(initialUrl) {
                 ...state,
                 status: "active"
             }
+
+        case "next":
+            return {
+                ...state,
+                index: state.index++
+            }
         default:
             throw new Error('Unknown error occured.')
     }
