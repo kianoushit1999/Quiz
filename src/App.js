@@ -9,6 +9,7 @@ import { useFetchData } from "./Hooks/useFetchData";
 import StartScreen from "./StartScreen";
 import Question from "./components/Question";
 import Progress from "./components/Progress";
+import FinishScreen from "./components/FinishScreen";
 
 function App() {
   const [setUrl, response, dispatch] = useFetchData(
@@ -60,7 +61,9 @@ function App() {
           </>
         )}
 
-        {response.status.toLowerCase() === "finished" && <p>Finished ...</p>}
+        {response.status.toLowerCase() === "finished" && (
+          <FinishScreen sumOfPoints={sumOfPoints} points={points} />
+        )}
       </Main>
     </div>
   );

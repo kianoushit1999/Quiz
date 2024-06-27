@@ -36,12 +36,20 @@ function Question({ qInfo, dispatch, onSetPoint, numQuestions, ind }) {
       })}
 
       {selectedAns !== null && (
-        <NextButton
-          dispatch={dispatch}
-          onReset={resetSelectedAnsHandler}
-          numQuestions={numQuestions}
-          ind={ind}
-        ></NextButton>
+        <>
+          <NextButton
+            dispatch={dispatch}
+            onReset={resetSelectedAnsHandler}
+            numQuestions={numQuestions}
+            ind={ind}
+          ></NextButton>
+          <button className="btn" onClick={()=>{
+            dispatch({
+                type:'restart'
+            })
+            onSetPoint(points => 0)
+          }}>Restart</button>
+        </>
       )}
     </div>
   );
