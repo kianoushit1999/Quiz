@@ -54,9 +54,13 @@ function App() {
               dispatch={dispatch}
               qInfo={response.questions[response.index]}
               onSetPoint={setPoints}
+              numQuestions={numQuestions}
+              ind={response.index}
             />
           </>
         )}
+
+        {response.status.toLowerCase() === "finished" && <p>Finished ...</p>}
       </Main>
     </div>
   );
