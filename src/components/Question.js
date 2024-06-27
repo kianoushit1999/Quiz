@@ -43,12 +43,6 @@ function Question({ qInfo, dispatch, onSetPoint, numQuestions, ind }) {
             numQuestions={numQuestions}
             ind={ind}
           ></NextButton>
-          <button className="btn" onClick={()=>{
-            dispatch({
-                type:'restart'
-            })
-            onSetPoint(points => 0)
-          }}>Restart</button>
         </>
       )}
     </div>

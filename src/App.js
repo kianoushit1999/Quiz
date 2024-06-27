@@ -62,7 +62,14 @@ function App() {
         )}
 
         {response.status.toLowerCase() === "finished" && (
+          <>
           <FinishScreen sumOfPoints={sumOfPoints} points={points} />
+          <button className="btn btn-ui" onClick={()=>{
+            dispatch({
+                type:'restart'
+            })
+            setPoints(points => 0)
+          }}>Restart</button></>
         )}
       </Main>
     </div>
