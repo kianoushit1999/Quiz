@@ -1,12 +1,12 @@
-import Header from "./Header";
+import Header from "./components/Header";
 import DateCounter from "./DateCounter";
-import Main from "./Main";
-import Loader from "./Loader";
-import Error from "./Error";
+import Main from "./components/Main";
+import Loader from "./components/Loader";
+import Error from "./components/Error";
 
 import { useFetchData } from "./Hooks/useFetchData";
 import StartScreen from "./StartScreen";
-import Question from "./Question";
+import Question from "./components/Question";
 
 function App() {
   const [setUrl, response, dispatch] = useFetchData(
